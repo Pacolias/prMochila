@@ -11,12 +11,12 @@ public class MochilaPD extends Mochila {
 		SolucionMochila sm;
 
 		int[][] tabla = new int[pm.size() + 1][pm.getPesoMaximo() + 1];
-		for (int[] ints : tabla)
-			Arrays.fill(ints, -2);
+		for (int[] celda : tabla)
+			Arrays.fill(celda, -2);
 
 		int[][] solucion = new int[pm.size() + 1][pm.getPesoMaximo() + 1];
-		for (int[] ints : solucion)
-			Arrays.fill(ints, 0);
+		for (int[] celda : solucion)
+			Arrays.fill(celda, 0);
 
 		valorMaximo(pm, tabla, pm.size(), pm.getPesoMaximo(), solucion);
 
@@ -25,7 +25,6 @@ public class MochilaPD extends Mochila {
 		//System.out.println(ArrayUtils.toString(solucion));
 
 		int[] solucionArray = new int[pm.size()];
-
 		for (int i = 0; i < pm.size(); i++)
 			solucionArray[i] = solucion[i + 1][pm.getPesoMaximo()];
 
