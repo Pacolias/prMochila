@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * @author ***** Indicar aqui el autor de la practica *******
  *
  */
@@ -7,39 +7,50 @@ public class MochilaAV extends Mochila {
 
 	public SolucionMochila resolver(ProblemaMochila pm) {
 		SolucionMochila sm;
-		
-		double[] densidades = new double[pm.size()];
-		
-		for(int i = 0; i < densidades.length; i++)
-			densidades[i] = (double) pm.getValor(i) / (double) pm.getPeso(i);
+
+		double[] densidad = new double[pm.size()];
+
+		for(int i = 0; i < densidad.length; i++) {
+			densidad[i] = (double) pm.getValor(i) / (double) pm.getPeso(i);
+		}
 
 		int mayor;
 		int[] indices = new int[pm.size()];
-		
-		for(int i = 0; i < densidades.length; i++) {
-			mayor = indiceMayor(densidades);
-			densidades[mayor] = -1;
+
+		for(int i = 0; i < densidad.length; i++) {
+			mayor = indiceMayor(densidad);
+			densidad[mayor] = -1;
 			indices[i] = mayor;
 		}
 
+		boolean hayHuecoLocal = true;
+		boolean hayHuecoGlobal = true;
+		int i = 0, j = 1;
 		int[] sol = new int[pm.size()];
 
-		for(int i = 0; i < densidades.length; i++) {
-			for(int j = 1; j <= pm.getUnidad(indices[i]); j++) {
+		while(hayHuecoGlobal && i < densidad.length) {
+			j = 1;
+			hayHuecoLocal = true;
+
+			while(hayHuecoLocal && j <= pm.getUnidad(indices[i])) {
 				sol[indices[i]] = j;
-				
-				if(pm.sumaPesos(sol) > pm.getPesoMaximo())
+
+				if(pm.sumaPesos(sol) > pm.getPesoMaximo()) {
 					sol[indices[i]]--;
+					hayHuecoLocal = !hayHuecoLocal;
+				}
+
+				j++;
 			}
-			
+
 			i++;
 		}
-		
+
 		sm = new SolucionMochila(sol, pm.sumaPesos(sol), pm.sumaValores(sol));
-		
+
 		return sm;
 	}
-	
+
 	private static int indiceMayor(double[] array) {
 		int indice = 0;
 
@@ -50,7 +61,7 @@ public class MochilaAV extends Mochila {
 				indice = i;
 			}
 		}
-		
+
 		return indice;
 	}
 }
