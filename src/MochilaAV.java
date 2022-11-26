@@ -6,12 +6,12 @@
 public class MochilaAV extends Mochila {
 
 	public SolucionMochila resolver(ProblemaMochila pm) {
-		SolucionMochila sm=null;
+		SolucionMochila sm;
 		
 		double[] densidad = new double[pm.size()];
 		
 		for(int i = 0; i < densidad.length; i++) {
-			densidad[i] = Double.valueOf(pm.getValor(i))/Double.valueOf(pm.getPeso(i));
+			densidad[i] = (double) pm.getValor(i) / (double) pm.getPeso(i);
 		}
 
 		int mayor;
@@ -22,7 +22,7 @@ public class MochilaAV extends Mochila {
 			densidad[mayor] = -1;
 			indices[i] = mayor;
 		}
-				
+
 		boolean hayHuecoLocal = true;
 		boolean hayHuecoGlobal = true;
 		int i = 0, j = 1;
@@ -52,10 +52,9 @@ public class MochilaAV extends Mochila {
 	}
 	
 	private static int indiceMayor(double[] array) {
-		
-		double mayor = array[0];
 		int indice = 0;
-		
+
+		double mayor = array[0];
 		for(int i = 0; i < array.length; i++) {
 			if(array[i] > mayor) {
 				mayor = array[i];
