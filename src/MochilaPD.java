@@ -47,12 +47,11 @@ public class MochilaPD extends Mochila {
 			int unidades = 0;
 			int valor;
 
-			for (int k = 1; k <= pm.getUnidad(i - 1); k++) {
-				if (k == pm.getUnidad(i - 1))
-					valor = valorMaximo(pm, tabla, i - 1, j - k * pm.getPeso(i - 1), solucion) + k * pm.getValor(i - 1);
-				else valor = valorMaximo(pm, tabla, i, j - k * pm.getPeso(i - 1), solucion) + k * pm.getValor(i - 1);
+			for (int k = 1; k <= pm.getUnidad(i - 1); k++){
 
-				if (valor > b) {
+				valor = valorMaximo(pm, tabla, i - 1, j - k * pm.getPeso(i - 1), solucion) + k * pm.getValor(i - 1);
+
+				if(valor > b){
 					b = valor;
 					unidades = k;
 				}
